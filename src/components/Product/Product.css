@@ -1,0 +1,20 @@
+.product{
+    display: flex;
+    border-bottom: 1px solid lightgray;
+    margin: 10px 10px 5px 100px;
+}
+.product img{margin-right: 10px;}
+.product-name{
+    color: blue;
+    font-weight: 300;
+    margin-left: 5px;
+}
+.add-button{ 
+    height: 30px;
+    width: 150px;
+    background-color: goldenrod;
+    border-radius: 5px;
+    border: 1px solid darkgrey;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
