@@ -4,10 +4,11 @@
     margin: 10px 10px 5px 100px;
 }
 .product img{margin-right: 10px;}
-.product-name{
+.product-name Link{
     color: blue;
     font-weight: 300;
     margin-left: 5px;
+    text-decoration: none;
 }
 .add-button{ 
     height: 30px;
