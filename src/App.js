@@ -13,13 +13,19 @@ import {
 import Inventory from './components/Inventory/Inventory';
 import Notfound from './components/NotFound/Notfound';
 import PrDetails from './components/PrDetails/PrDetails';
+import Login from './components/Login/Login';
+import { AuthContextProvider, PrivateRoute } from './components/Login/useAuth';
+import Shipment from './components/Shipment/Shipment';
+
+
 
 
 function App() {
   return (
+  
    
-      
       <Router>
+        <AuthContextProvider>
         <Header></Header>
          <div>
         <Switch>
@@ -38,12 +44,20 @@ function App() {
               <Route path='/product/:productKey'>
                 <PrDetails></PrDetails>
               </Route>
+              <PrivateRoute path ='/Shipment'>
+                <Shipment ></Shipment>
+              </PrivateRoute>
+              <Route path ='/Login'>
+                <Login></Login>
+              </Route>
+              
               <Route path='*'>
                 <Notfound></Notfound>
               </Route>
 
         </Switch>
         </div>
+        </AuthContextProvider>
       </Router>
       
       

@@ -1,8 +1,11 @@
 import React from 'react';
+import { useAuth } from '../Login/useAuth';
 
 
 const Cart = (props) => {
-
+    const auth = useAuth();
+    //console.log(auth.user);
+   
     const cart = props.cart
     //console.log(cart)
     //const total = cart.reduce((total,prd) => total + prd.price,0)
@@ -36,6 +39,7 @@ const Cart = (props) => {
             <p>Total Price: {grandTotal}</p>
             <br/>
             {props.children}
+            
         </div>
     );
 };
