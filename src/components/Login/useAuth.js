@@ -28,6 +28,7 @@ export const useAuth = ()=> useContext(AuthContext);
 
 export const PrivateRoute = ({ children, ...rest })=> {
     const auth = useAuth();
+    console.log(auth,'second')
     return (
       <Route
         {...rest}
