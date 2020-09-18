@@ -24,7 +24,7 @@ const Header = () => {
             
                 {
                     auth.user.isSignedIn &&
-                    <span style={{color:'yellow'}}>Welcome {auth.user.email}</span>
+                    <span style={{color:'yellow'}}>Welcome {auth.user.name}</span>
                     
                     
                 }
