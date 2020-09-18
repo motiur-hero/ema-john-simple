@@ -134,7 +134,7 @@ const handleSubmit = (e)=>{
       const newUserInfo= {...user}
       newUserInfo.error = '';
       newUserInfo.success = true;
-      
+      newUserInfo.name = user.name
       setUser(newUserInfo);
       console.log(newUserInfo)
     })
@@ -151,18 +151,18 @@ const handleSubmit = (e)=>{
   e.preventDefault();
 }
 
-let name=user.name
-const getUser = user=> {
+
+// const getUser = user=> {
      
-  const { email,displayName} = user;
-      return {name:displayName,email,isSignedIn:true,success:true,name};
+//   const { email,displayName,} = user;
+//       return {name:(displayName,user.name),email,isSignedIn:true,success:true,};
       
-}
+// }
 
 useEffect(()=>{firebase.auth().onAuthStateChanged(function(usr) {
     if (usr) {
       //const {displayName,email,} = usr
-        const currentUser = getUser(usr)
+        const currentUser = {name:user.name,}
             setUser(currentUser)
            
     } else {
