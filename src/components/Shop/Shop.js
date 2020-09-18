@@ -54,7 +54,7 @@ const Shop = () => {
     return (
         <div className="shop-container">
             <div className="product-container">
-    <h1><button onClick={()=> setCount(count+1)}>count:{count}</button></h1>
+    
                 {products.map(pd =><Product key={pd.key} showCartBtn = {true} handleAddProduct = {handleAddProduct}product={pd}> </Product> )}
             
             </div>

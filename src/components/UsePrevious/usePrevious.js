@@ -17,6 +17,7 @@ const [count, setCount] = useState(0);
 const previous = usePrevious(count)
 
     return (
+        <div><h1><button onClick={()=> setCount(count+1)}>count:{count}</button></h1></div>
         <div>
             <h1>count:{count} previous : {previous}</h1>
             <button  onClick={ ()=> setCount(count+1)}>+</button>

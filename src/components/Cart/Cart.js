@@ -1,9 +1,9 @@
 import React from 'react';
-import { useAuth } from '../Login/useAuth';
+//import { useAuth } from '../Login/useAuth';
 
 
 const Cart = (props) => {
-    const auth = useAuth();
+    //const auth = useAuth();
     //console.log(auth.user);
    
     const cart = props.cart

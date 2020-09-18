@@ -1,7 +1,7 @@
 import React from 'react';
 import * as firebase from "firebase/app";
 import "firebase/auth";
-import firebaseConfig from "../../firebase.config"
+import firebaseConfig from "../../firebase.config" 
 import { useState } from "react";
 import { createContext } from "react";
 import { useContext } from 'react';
@@ -12,10 +12,7 @@ import { Route, Redirect} from 'react-router-dom'
 
 firebase.initializeApp(firebaseConfig)
 
-const getUser = user=> {
-    const {displayName, email, photoUrl} = user;
-        return {name: displayName, email, photo: photoUrl};
-}
+
 
 const AuthContext = createContext();
 
@@ -28,14 +25,15 @@ export const useAuth = ()=> useContext(AuthContext);
 
 export const PrivateRoute = ({ children, ...rest })=> {
     const auth = useAuth();
-    console.log(auth,'second')
+    //console.log(auth)
     return (
       <Route
         {...rest}
         render={({ location }) =>
           auth.user ? (
             children
-          ) : (
+          ) 
+          : (
             <Redirect
               to={{
                 pathname: "/login",
@@ -47,17 +45,36 @@ export const PrivateRoute = ({ children, ...rest })=> {
       />
     );
   }
+   const getUser = user=> {
+     
+    const { email,displayName,} = user;
+        return {name:displayName,email,isSignedIn:true};
+        
+ }
+
 
 const Auth = ()=>{
-    const [user,setUser] = useState(null);
+  const [user,setUser] = useState({
+    isSignedIn:false,
+    name:'',
+    email:'',
+    password:''
+   
+  });
+  
+    
 const provider = new firebase.auth.GoogleAuthProvider();
 const signInWithGoogle = () =>{
    return firebase.auth().signInWithPopup(provider)
     .then(res => {
-        const signedInUser = getUser(res.user)
+      const {displayName,email} = res.user;
+        const signedInUser ={isSignedIn:true,
+                              name: displayName,
+                               email: email}
+      
         setUser(signedInUser);
-    
-        return res.user;
+   console.log(user)
+       return res.user;
     })
     .catch(err =>{
         console.log(err)
@@ -66,9 +83,24 @@ const signInWithGoogle = () =>{
     })
 
 }
+
+
+
+
+
+
 const signOut = () =>{
     return firebase.auth().signOut().then(function() {
-        setUser(null)
+      const signOutUser ={
+                          name:'',
+                          isSignedIn:false,
+                          email:'',
+                          password:'',
+                          error:'',
+                          success:false
+                        }
+        setUser(signOutUser)
+      
         return true;
       }).catch(function(error) {
         return false;
@@ -76,21 +108,71 @@ const signOut = () =>{
         
 }
 
+const handleBlur =(e)=>{
+//console.log(e.target.name, e.target.value);
+let isFormValid = true;
+if(e.target.name === 'email'){
+   isFormValid = /^\w+(.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/.test(e.target.value);
+  console.log(isFormValid)
+}
+if(e.target.name === 'password'){
+  const isLengthValid = e.target.value.length > 7 ;
+  const isNumberValid = /^-?(\d+\.?\d*)$|(\d*\.?\d+)$/.test(e.target.value);
+   isFormValid = (isLengthValid && isNumberValid);
+  console.log(isFormValid);
+}
+if(isFormValid){
+  const newUserInfo = {...user};
+   newUserInfo[e.target.name] = e.target.value;
+   setUser(newUserInfo);
+   console.log(newUserInfo);
+}
+};
+
+const handleSubmit = (e)=>{
+  if(user.email && user.password)
+  {
+    firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
+    .then(res=>{
+      
+      const newUserInfo= {...user}
+      newUserInfo.error = '';
+      newUserInfo.success = true;
+      newUserInfo.isSignedIn = false;
+      setUser(newUserInfo);
+      console.log(newUserInfo)
+    })
+    .catch(error=> {
+      // Handle Errors here.
+      const newUserInfo = {...user}
+      console.log(newUserInfo)
+      newUserInfo.success =false;
+      newUserInfo.error = error.message
+      setUser(newUserInfo);
+      console.log(newUserInfo)
+    });
+  }
+  e.preventDefault();
+}
+
+
 useEffect(()=>{firebase.auth().onAuthStateChanged(function(usr) {
     if (usr) {
+      //const {displayName,email,} = usr
         const currentUser = getUser(usr)
             setUser(currentUser)
            
     } else {
-      // No user is signed in.
+      setUser({isSignedIn:false,email:'',name:''})
     }
   });},[])
 
 
 
+   
 return {
-    signInWithGoogle,
-    user,
+    signInWithGoogle,handleSubmit,
+    user,handleBlur,
     signOut }
 }
 

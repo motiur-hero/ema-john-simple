@@ -35,7 +35,7 @@ function App() {
               <Route path='/review'>
                 <Review></Review>
               </Route>
-              <Route path='/Inventory'>
+              <Route path='/orders'>
               <Inventory></Inventory>
               </Route>
               <Route exact path ='/'>
