@@ -152,17 +152,17 @@ const handleSubmit = (e)=>{
 }
 
 
-// const getUser = user=> {
+const getUser = user=> {
      
-//   const { email,displayName,} = user;
-//       return {name:(displayName,user.name),email,isSignedIn:true,success:true,};
+  const { email,displayName,} = user;
+      return {name:displayName,email,isSignedIn:true,success:true,};
       
-// }
+}
 
 useEffect(()=>{firebase.auth().onAuthStateChanged(function(usr) {
     if (usr) {
       //const {displayName,email,} = usr
-        const currentUser = {name:user.name,}
+        const currentUser = getUser(usr)
             setUser(currentUser)
            
     } else {

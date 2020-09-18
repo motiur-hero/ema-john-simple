@@ -1,0 +1,16 @@
+-------------------- Auto-Git Log --------------------
+		Fri Sep 18 2020 16:12:51 GMT+0300 (Arabian Standard Time)
+------------------------------------------------------
+
+Modified files:
+* src/components/Login/useAuth.js
+
+
+Created files:
+* .autogit/logs/log-18-8-2020-15-42-38.txt
+
+
+Deleted files:
+
+
+Renamed files:
