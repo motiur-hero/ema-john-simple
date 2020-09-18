@@ -45,12 +45,7 @@ export const PrivateRoute = ({ children, ...rest })=> {
       />
     );
   }
-   const getUser = user=> {
-     
-    const { email,displayName,} = user;
-        return {name:displayName,email,isSignedIn:true};
-        
- }
+   
 
 
 const Auth = ()=>{
@@ -58,7 +53,8 @@ const Auth = ()=>{
     isSignedIn:false,
     name:'',
     email:'',
-    password:''
+    password:'',
+    success:false
    
   });
   
@@ -138,7 +134,7 @@ const handleSubmit = (e)=>{
       const newUserInfo= {...user}
       newUserInfo.error = '';
       newUserInfo.success = true;
-      newUserInfo.isSignedIn = false;
+      
       setUser(newUserInfo);
       console.log(newUserInfo)
     })
@@ -155,6 +151,13 @@ const handleSubmit = (e)=>{
   e.preventDefault();
 }
 
+let name=user.name
+const getUser = user=> {
+     
+  const { email,displayName} = user;
+      return {name:displayName,email,isSignedIn:true,success:true,name};
+      
+}
 
 useEffect(()=>{firebase.auth().onAuthStateChanged(function(usr) {
     if (usr) {
