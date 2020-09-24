@@ -5,7 +5,7 @@ import './Login.css'
 
 const Login = () => {
     const auth = Auth();
-   console.log(auth.user)
+   //console.log(auth.user)
     const handleSignIn = ()=>{
       auth.signInWithGoogle()
       .then(res =>{
