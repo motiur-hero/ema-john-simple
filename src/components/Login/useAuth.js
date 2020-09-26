@@ -128,7 +128,7 @@ if(isFormValid){
 const handleSubmit = (e)=>{
   if(user.email && user.password && user.name)
   {
-    firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
+   return firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
     .then(res=>{
        
       const newUserInfo= {...user}
@@ -161,7 +161,7 @@ const getUser = user=> {
 }
 
 useEffect(()=>{firebase.auth().onAuthStateChanged(function(usr) {
-    if (usr) {
+    if ( usr) {
       
         const currentUser = getUser(usr)
             setUser(currentUser)
