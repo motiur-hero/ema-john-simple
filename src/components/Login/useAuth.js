@@ -167,7 +167,7 @@ useEffect(()=>{firebase.auth().onAuthStateChanged(function(usr) {
             setUser(currentUser)
            
     } else {
-      setUser({isSignedIn:false,email:'',name:''})
+      setUser({isSignedIn:false, name:"empty",email:"empty",success:false})
     }
   });},[])
 
