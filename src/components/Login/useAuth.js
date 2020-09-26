@@ -70,7 +70,7 @@ const signInWithGoogle = () =>{
       
         setUser(signedInUser);
    console.log(user)
-       return res.user;
+    return signedInUser;
     })
     .catch(err =>{
         console.log(err)
@@ -134,6 +134,7 @@ const handleSubmit = (e)=>{
       const newUserInfo= {...user}
       newUserInfo.error = '';
       newUserInfo.success = true;
+      newUserInfo.isSignedIn = false;
       newUserInfo.name = user.name
       setUser(newUserInfo);
       console.log(newUserInfo)
