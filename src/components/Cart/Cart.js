@@ -39,6 +39,11 @@ const Cart = (props) => {
             <p>Total Price: {grandTotal}</p>
             <br/>
             {props.children}
+
+            <div>
+                <audio src="../../media/audio.mp3"></audio>
+                
+            </div>
             
         </div>
     );
