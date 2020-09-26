@@ -130,7 +130,7 @@ const handleSubmit = (e)=>{
   {
     firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
     .then(res=>{
-      
+       
       const newUserInfo= {...user}
       newUserInfo.error = '';
       newUserInfo.success = true;
